@@ -91,7 +91,7 @@
 //#define SHOW_CUSTOM_BOOTSCREEN
 
 // Show the bitmap in Marlin/_Statusscreen.h on the status screen.
-#define CUSTOM_STATUS_SCREEN_IMAGE
+//#define CUSTOM_STATUS_SCREEN_IMAGE
 
 // @section machine
 
@@ -132,7 +132,7 @@
 #endif
 
 // Name displayed in the LCD "Ready" message and Info menu
-//#define CUSTOM_MACHINE_NAME "3D Printer"
+#define CUSTOM_MACHINE_NAME "Tronxy X5SA V6 330 Titan TMC"
 
 // Printer's unique ID, used by some programs to differentiate between machines.
 // Choose your own or use a service like https://www.uuidgenerator.net/version4
@@ -2454,10 +2454,10 @@
 #endif
 
 #define TFT_MARLINUI_COLOR COLOR_WHITE  // main foreground color
-  #define TFT_MARLINBG_COLOR COLOR_BLACK  // background color
-  #define TFT_BTCANCEL_COLOR COLOR_RED    // cancel button
-  #define TFT_BTARROWS_COLOR COLOR_WHITE  // arrows up/down
-  #define TFT_BTOKMENU_COLOR COLOR_GREEN  // enter button
+#define TFT_MARLINBG_COLOR COLOR_BLACK  // background color
+#define TFT_BTCANCEL_COLOR COLOR_RED    // cancel button
+#define TFT_BTARROWS_COLOR COLOR_WHITE  // arrows up/down
+#define TFT_BTOKMENU_COLOR COLOR_GREEN  // enter button
 
 //
 // RepRapWorld REPRAPWORLD_KEYPAD v1.1
