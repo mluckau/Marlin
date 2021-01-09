@@ -807,7 +807,7 @@
 #if ENABLED(ASSISTED_TRAMMING)
 
   // Define positions for probe points.
-  #define TRAMMING_POINT_XY { { 20, 20 }, { 165, 20 }, { 285, 20 }, { 285, 308 }, { 165, 308 }, { 20, 308 } }
+  #define TRAMMING_POINT_XY { { 5, 12 }, { 165, 12 }, { 276, 12 }, { 276, 318 }, { 165, 318 }, { 5, 318 } }
 
   // Define position names for probe points.
   #define TRAMMING_POINT_NAME_1 "Front-Left"
@@ -1757,9 +1757,9 @@
  * the probe to be unable to reach any points.
  */
 #if PROBE_SELECTED && !IS_KINEMATIC
-  //#define PROBING_MARGIN_LEFT PROBING_MARGIN
+  #define PROBING_MARGIN_LEFT 5
   //#define PROBING_MARGIN_RIGHT PROBING_MARGIN
-  //#define PROBING_MARGIN_FRONT PROBING_MARGIN
+  #define PROBING_MARGIN_FRONT 12
   //#define PROBING_MARGIN_BACK PROBING_MARGIN
 #endif
 
