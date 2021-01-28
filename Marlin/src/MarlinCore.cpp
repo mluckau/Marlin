@@ -365,7 +365,8 @@ void startOrResumeJob() {
 
     queue.clear();
     quickstop_stepper();
-    print_job_timer.stop();
+
+    print_job_timer.abort();
 
     IF_DISABLED(SD_ABORT_NO_COOLDOWN, thermalManager.disable_all_heaters());
 
@@ -919,12 +920,12 @@ void setup() {
 
   MYSERIAL0.begin(BAUDRATE);
   millis_t serial_connect_timeout = millis() + 1000UL;
-  while (!MYSERIAL0 && PENDING(millis(), serial_connect_timeout)) { /*nada*/ }
+  while (!MYSERIAL0.connected() && PENDING(millis(), serial_connect_timeout)) { /*nada*/ }
 
   #if HAS_MULTI_SERIAL && !HAS_ETHERNET
     MYSERIAL1.begin(BAUDRATE);
     serial_connect_timeout = millis() + 1000UL;
-    while (!MYSERIAL1 && PENDING(millis(), serial_connect_timeout)) { /*nada*/ }
+    while (!MYSERIAL1.connected() && PENDING(millis(), serial_connect_timeout)) { /*nada*/ }
   #endif
   SERIAL_ECHOLNPGM("start");
 
