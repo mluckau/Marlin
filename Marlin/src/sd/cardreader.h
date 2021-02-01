@@ -263,17 +263,6 @@ private:
   #endif
 
   //
-  // SD Auto Reporting
-  //
-  #if ENABLED(AUTO_REPORT_SD_STATUS)
-    static uint8_t auto_report_sd_interval;
-    static millis_t next_sd_report_ms;
-    #if HAS_MULTI_SERIAL
-      static serial_index_t auto_report_port;
-    #endif
-  #endif
-
-  //
   // Directory items
   //
   static bool is_dir_or_gcode(const dir_t &p);
