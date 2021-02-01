@@ -19,26 +19,31 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  *
  */
+#pragma once
 
-#include "../../inc/MarlinConfig.h"
+#include "../inc/MarlinConfig.h"
 
-#if ENABLED(SDSUPPORT)
+template <typename Helper>
+struct AutoReporter {
+  millis_t next_report_ms;
+  uint8_t report_interval;
+  #if HAS_MULTI_SERIAL
+    serial_index_t report_port_mask;
+    AutoReporter() : report_port_mask(SERIAL_ALL) {}
+  #endif
 
-#include "../gcode.h"
-#include "../../sd/cardreader.h"
-#include "../../lcd/marlinui.h"
+  inline void set_interval(uint8_t seconds, const uint8_t limit=60) {
+    report_interval = _MIN(seconds, limit);
+    next_report_ms = millis() + SEC_TO_MS(seconds);
+  }
 
-/**
- * M21: Init SD Card
- */
-void GcodeSuite::M21() { card.mount(); }
-
-/**
- * M22: Release SD Card
- */
-void GcodeSuite::M22() {
-  if (!IS_SD_PRINTING()) card.release();
-  IF_ENABLED(TFT_COLOR_UI, ui.refresh(LCDVIEW_CALL_REDRAW_NEXT));
-}
-
-#endif // SDSUPPORT
+  inline void tick() {
+    if (!report_interval) return;
+    const millis_t ms = millis();
+    if (ELAPSED(ms, next_report_ms)) {
+      next_report_ms = ms + SEC_TO_MS(report_interval);
+      TERN_(HAS_MULTI_SERIAL, PORT_REDIRECT(report_port_mask));
+      Helper::report();
+    }
+  }
+};

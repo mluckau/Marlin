@@ -19,26 +19,15 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  *
  */
+#pragma once
 
-#include "../../inc/MarlinConfig.h"
+#ifdef __cplusplus
+  extern "C" { /* C-declarations for C++ */
+#endif
 
-#if ENABLED(SDSUPPORT)
+extern void lv_draw_gcode(bool clear = false);
+extern void lv_clear_gcode();
 
-#include "../gcode.h"
-#include "../../sd/cardreader.h"
-#include "../../lcd/marlinui.h"
-
-/**
- * M21: Init SD Card
- */
-void GcodeSuite::M21() { card.mount(); }
-
-/**
- * M22: Release SD Card
- */
-void GcodeSuite::M22() {
-  if (!IS_SD_PRINTING()) card.release();
-  IF_ENABLED(TFT_COLOR_UI, ui.refresh(LCDVIEW_CALL_REDRAW_NEXT));
-}
-
-#endif // SDSUPPORT
+#ifdef __cplusplus
+  } /* C-declarations for C++ */
+#endif
