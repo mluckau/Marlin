@@ -151,12 +151,9 @@
 #endif
 
 #if TEMP_SENSOR_CHAMBER
-  // Make sure you define where your heater is connected, the following works on a BTT SKR 1.4 Turbo
-  // using the secondary tool heater output. (FAN1 by default).
-  //#define FAN1_PIN                   -1   // Remove the fan signal on pin P2_04 (SKR 1.4 Turbo specific)
-  //#define HEATER_CHAMBER_PIN      P2_04   // Chamber heater on/off pin (HE1 connector on SKR 1.4 Turbo)
-
+  //#define HEATER_CHAMBER_PIN      P2_04   // Required heater on/off pin (example: SKR 1.4 Turbo HE1 plug)
   //#define HEATER_CHAMBER_INVERTING false
+  //#define FAN1_PIN                   -1   // Remove the fan signal on pin P2_04 (example: SKR 1.4 Turbo HE1 plug)
 
   //#define CHAMBER_FAN               // Enable a fan on the chamber
   #if ENABLED(CHAMBER_FAN)
@@ -871,9 +868,6 @@
 #define DISABLE_INACTIVE_Z true  // Set 'false' if the nozzle could fall onto your printed part!
 #define DISABLE_INACTIVE_E true
 
-// If the Nozzle or Bed falls when the Z stepper is disabled, set its resting position here.
-//#define Z_AFTER_DEACTIVATE Z_HOME_POS
-
 // Default Minimum Feedrates for printing and travel moves
 #define DEFAULT_MINIMUMFEEDRATE       0.0     // (mm/s) Minimum feedrate. Set with M205 S.
 #define DEFAULT_MINTRAVELFEEDRATE     0.0     // (mm/s) Minimum travel feedrate. Set with M205 T.
@@ -1151,6 +1145,9 @@
       //#define NEO2_USER_PRESET_STARTUP       // Have the printer display the user preset color on startup for the second strip
     #endif
   #endif
+
+  // Insert a menu for preheating at the top level to allow for quick access
+  //#define PREHEAT_SHORTCUT_MENU_ITEM
 
 #endif // HAS_LCD_MENU
 
@@ -2025,6 +2022,12 @@
   // of dropped bytes after a file transfer to SD.
   //#define SERIAL_STATS_DROPPED_RX
 #endif
+
+// Monitor RX buffer usage
+// Dump an error to the serial port if the serial receive buffer overflows.
+// If you see these errors, increase the RX_BUFFER_SIZE value.
+// Not supported on all platforms.
+//#define RX_BUFFER_MONITOR
 
 /**
  * Emergency Command Parser
