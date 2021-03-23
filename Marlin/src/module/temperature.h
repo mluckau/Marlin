@@ -323,8 +323,7 @@ class Temperature {
     #if HAS_HOTEND
       #define HOTEND_TEMPS (HOTENDS + ENABLED(TEMP_SENSOR_1_AS_REDUNDANT))
       static hotend_info_t temp_hotend[HOTEND_TEMPS];
-      static const uint16_t hotend_maxtemp[HOTENDS];
-      FORCE_INLINE static uint16_t hotend_max_target(const uint8_t e) { return hotend_maxtemp[e] - (HOTEND_OVERSHOOT); }
+      static const uint16_t heater_maxtemp[HOTENDS];
     #endif
     TERN_(HAS_HEATED_BED, static bed_info_t temp_bed);
     TERN_(HAS_TEMP_PROBE, static probe_info_t temp_probe);
@@ -561,9 +560,8 @@ class Temperature {
       }
 
       #if ENABLED(EXTRA_FAN_SPEED)
-        typedef struct { uint8_t saved, speed; } extra_fan_t;
-        static extra_fan_t extra_fan_speed[FAN_COUNT];
-        static void set_temp_fan_speed(const uint8_t fan, const uint16_t command_or_speed);
+        static uint8_t old_fan_speed[FAN_COUNT], new_fan_speed[FAN_COUNT];
+        static void set_temp_fan_speed(const uint8_t fan, const uint16_t tmp_temp);
       #endif
 
       #if EITHER(PROBING_FANS_OFF, ADVANCED_PAUSE_FANS_PAUSE)
@@ -641,7 +639,7 @@ class Temperature {
             start_preheat_time(ee);
         #endif
         TERN_(AUTO_POWER_CONTROL, if (celsius) powerManager.power_on());
-        temp_hotend[ee].target = _MIN(celsius, hotend_max_target(ee));
+        temp_hotend[ee].target = _MIN(celsius, temp_range[ee].maxtemp - HOTEND_OVERSHOOT);
         start_watching_hotend(ee);
       }
 
@@ -787,7 +785,13 @@ class Temperature {
 
     #if HAS_COOLER
       static void setTargetCooler(const int16_t celsius) {
-        temp_cooler.target = constrain(celsius, COOLER_MIN_TARGET, COOLER_MAX_TARGET);
+        temp_cooler.target =
+          #ifdef COOLER_MAXTEMP
+            _MIN(celsius, COOLER_MAXTEMP - 10)
+          #else
+            celsius
+          #endif
+        ;
         start_watching_cooler();
       }
     #endif
@@ -874,7 +878,7 @@ class Temperature {
     TERN_(HAS_DISPLAY, static void set_heating_message(const uint8_t e));
 
     #if HAS_LCD_MENU && HAS_TEMPERATURE
-      static void lcd_preheat(const uint8_t e, const int8_t indh, const int8_t indb);
+      static void lcd_preheat(const int16_t e, const int8_t indh, const int8_t indb);
     #endif
 
   private:

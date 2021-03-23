@@ -390,12 +390,14 @@ public:
       }
     }
 
-  #else // !TEMPERATURE_UNITS_SUPPORT
+    #define TEMP_UNIT(N) parser.to_temp_units(N)
 
-    static inline float to_temp_units(int16_t c) { return (float)c; }
+  #else // !TEMPERATURE_UNITS_SUPPORT
 
     static inline float value_celsius()      { return value_float(); }
     static inline float value_celsius_diff() { return value_float(); }
+
+    #define TEMP_UNIT(N) (N)
 
   #endif // !TEMPERATURE_UNITS_SUPPORT
 

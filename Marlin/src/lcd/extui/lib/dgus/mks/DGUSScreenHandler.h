@@ -149,7 +149,6 @@ public:
     // Hook for filament load and unload
     static void HandleFilamentLoadUnload(DGUS_VP_Variable &var);
 
-    static void MKS_FilamentLoadUnload(DGUS_VP_Variable &var, void *val_ptr, const int filamentDir);
     static void MKS_FilamentLoad(DGUS_VP_Variable &var, void *val_ptr);
     static void MKS_FilamentUnLoad(DGUS_VP_Variable &var, void *val_ptr);
     static void MKS_LOAD_UNLOAD_IDLE();
