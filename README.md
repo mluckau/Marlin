@@ -10,7 +10,7 @@
 Additional documentation can be found at the [Marlin Home Page](https://marlinfw.org/).
 Please test this firmware and let us know if it misbehaves in any way. Volunteers are standing by!
 
-## Marlin 2.0 Bugfix Branch
+## Marlin 2.0 Bugfix Branch for Tronxy X5SA-Pro
 
 __Not for production use. Use with caution!__
 
