@@ -1,0 +1,104 @@
+EESchema Schematic File Version 4
+EELAYER 30 0
+EELAYER END
+$Descr A4 11693 8268
+encoding utf-8
+Sheet 1 1
+Title ""
+Date ""
+Rev ""
+Comp ""
+Comment1 ""
+Comment2 ""
+Comment3 ""
+Comment4 ""
+$EndDescr
+$Comp
+L Device:R R1
+U 1 1 6072D0FC
+P 2400 2450
+F 0 "R1" H 2470 2496 50  0000 L CNN
+F 1 "1k1" H 2470 2405 50  0000 L CNN
+F 2 "" V 2330 2450 50  0001 C CNN
+F 3 "~" H 2400 2450 50  0001 C CNN
+	1    2400 2450
+	1    0    0    -1  
+$EndComp
+$Comp
+L Isolator:PC817 U1
+U 1 1 60731E38
+P 3600 3250
+F 0 "U1" H 3600 3575 50  0000 C CNN
+F 1 "PC817" H 3600 3484 50  0000 C CNN
+F 2 "Package_DIP:DIP-4_W7.62mm" H 3400 3050 50  0001 L CIN
+F 3 "http://www.soselectronic.cz/a_info/resource/d/pc817.pdf" H 3600 3250 50  0001 L CNN
+	1    3600 3250
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:+24V #PWR?
+U 1 1 60733B85
+P 1500 1250
+F 0 "#PWR?" H 1500 1100 50  0001 C CNN
+F 1 "+24V" H 1515 1423 50  0000 C CNN
+F 2 "" H 1500 1250 50  0001 C CNN
+F 3 "" H 1500 1250 50  0001 C CNN
+	1    1500 1250
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:GND #PWR?
+U 1 1 60734C24
+P 1600 4000
+F 0 "#PWR?" H 1600 3750 50  0001 C CNN
+F 1 "GND" H 1605 3827 50  0000 C CNN
+F 2 "" H 1600 4000 50  0001 C CNN
+F 3 "" H 1600 4000 50  0001 C CNN
+	1    1600 4000
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:GND #PWR?
+U 1 1 607354C6
+P 4700 4050
+F 0 "#PWR?" H 4700 3800 50  0001 C CNN
+F 1 "GND" H 4705 3877 50  0000 C CNN
+F 2 "" H 4700 4050 50  0001 C CNN
+F 3 "" H 4700 4050 50  0001 C CNN
+	1    4700 4050
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	1500 1250 1500 1600
+Wire Wire Line
+	1500 1600 2400 1600
+Wire Wire Line
+	2400 1600 2400 2300
+Wire Wire Line
+	3300 3150 2400 3150
+Wire Wire Line
+	2400 3150 2400 2600
+Wire Wire Line
+	3300 3350 1600 3350
+Wire Wire Line
+	1600 3350 1600 4000
+$Comp
+L power:+5V #PWR?
+U 1 1 6073689B
+P 4700 1200
+F 0 "#PWR?" H 4700 1050 50  0001 C CNN
+F 1 "+5V" H 4715 1373 50  0000 C CNN
+F 2 "" H 4700 1200 50  0001 C CNN
+F 3 "" H 4700 1200 50  0001 C CNN
+	1    4700 1200
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	4700 1200 4700 3150
+Wire Wire Line
+	4700 3150 3900 3150
+Wire Wire Line
+	3900 3350 4700 3350
+Wire Wire Line
+	4700 3350 4700 4050
+$EndSCHEMATC

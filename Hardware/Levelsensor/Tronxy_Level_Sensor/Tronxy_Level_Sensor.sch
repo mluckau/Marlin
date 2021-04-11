@@ -1,0 +1,122 @@
+EESchema Schematic File Version 4
+EELAYER 30 0
+EELAYER END
+$Descr A4 11693 8268
+encoding utf-8
+Sheet 1 1
+Title ""
+Date ""
+Rev ""
+Comp ""
+Comment1 ""
+Comment2 ""
+Comment3 ""
+Comment4 ""
+$EndDescr
+$Comp
+L Device:R R1
+U 1 1 6072D0FC
+P 3250 3100
+F 0 "R1" H 3320 3146 50  0000 L CNN
+F 1 "1k1" H 3320 3055 50  0000 L CNN
+F 2 "Resistor_THT:R_Axial_DIN0204_L3.6mm_D1.6mm_P7.62mm_Horizontal" V 3180 3100 50  0001 C CNN
+F 3 "~" H 3250 3100 50  0001 C CNN
+	1    3250 3100
+	0    -1   -1   0   
+$EndComp
+$Comp
+L Isolator:PC817 U1
+U 1 1 60731E38
+P 3800 3200
+F 0 "U1" H 3800 3525 50  0000 C CNN
+F 1 "PC817" H 3800 3434 50  0000 C CNN
+F 2 "Package_DIP:DIP-4_W7.62mm" H 3600 3000 50  0001 L CIN
+F 3 "http://www.soselectronic.cz/a_info/resource/d/pc817.pdf" H 3800 3200 50  0001 L CNN
+	1    3800 3200
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:+24V #PWR0101
+U 1 1 60733B85
+P 2950 2750
+F 0 "#PWR0101" H 2950 2600 50  0001 C CNN
+F 1 "+24V" H 2965 2923 50  0000 C CNN
+F 2 "" H 2950 2750 50  0001 C CNN
+F 3 "" H 2950 2750 50  0001 C CNN
+	1    2950 2750
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:GND #PWR0102
+U 1 1 60734C24
+P 3500 3500
+F 0 "#PWR0102" H 3500 3250 50  0001 C CNN
+F 1 "GND" H 3505 3327 50  0000 C CNN
+F 2 "" H 3500 3500 50  0001 C CNN
+F 3 "" H 3500 3500 50  0001 C CNN
+	1    3500 3500
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	2950 2750 2950 3100
+$Comp
+L power:+5V #PWR0104
+U 1 1 6073689B
+P 4300 2450
+F 0 "#PWR0104" H 4300 2300 50  0001 C CNN
+F 1 "+5V" H 4315 2623 50  0000 C CNN
+F 2 "" H 4300 2450 50  0001 C CNN
+F 3 "" H 4300 2450 50  0001 C CNN
+	1    4300 2450
+	1    0    0    -1  
+$EndComp
+Text GLabel 4900 3300 2    50   Output ~ 0
+Z-Endstop
+Wire Wire Line
+	4100 3300 4300 3300
+Wire Wire Line
+	4300 2450 4300 3100
+Wire Wire Line
+	4300 3100 4100 3100
+Wire Wire Line
+	3500 3300 3500 3500
+Wire Wire Line
+	3400 3100 3500 3100
+Wire Wire Line
+	2950 3100 3100 3100
+Text Notes 2900 2800 2    50   ~ 0
+Vom kapazitiven \nLevelsensor
+$Comp
+L power:GNDPWR #PWR?
+U 1 1 60740B93
+P 4300 3700
+F 0 "#PWR?" H 4300 3500 50  0001 C CNN
+F 1 "GNDPWR" H 4304 3546 50  0000 C CNN
+F 2 "" H 4300 3650 50  0001 C CNN
+F 3 "" H 4300 3650 50  0001 C CNN
+	1    4300 3700
+	1    0    0    -1  
+$EndComp
+Text Notes 4050 4000 0    50   ~ 0
+GND von den 5V
+$Comp
+L Device:R R2
+U 1 1 607419C5
+P 4300 3500
+F 0 "R2" H 4370 3546 50  0000 L CNN
+F 1 "10k" H 4370 3455 50  0000 L CNN
+F 2 "" V 4230 3500 50  0001 C CNN
+F 3 "~" H 4300 3500 50  0001 C CNN
+	1    4300 3500
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	4300 3350 4300 3300
+Connection ~ 4300 3300
+Wire Wire Line
+	4300 3300 4900 3300
+Wire Wire Line
+	4300 3650 4300 3700
+Text Notes 3650 2800 0    50   ~ 0
+Diode \nVf=1,2V \nIf=20mA
+$EndSCHEMATC
