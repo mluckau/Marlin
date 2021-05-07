@@ -520,9 +520,15 @@
     #define DEFAULT_Ki_LIST {   1.08,   1.08 }
     #define DEFAULT_Kd_LIST { 114.00, 114.00 }
   #else
-    #define DEFAULT_Kp  15.24
-    #define DEFAULT_Ki   0.92
-    #define DEFAULT_Kd  63.25
+    //#define DEFAULT_Kp  15.24
+    //#define DEFAULT_Ki   0.92
+    //#define DEFAULT_Kd  63.25
+
+    //Tronxy X5SA-Pro
+    #define DEFAULT_Kp  17.2651
+    #define DEFAULT_Ki   0.9847
+    #define DEFAULT_Kd  75.6752
+
   #endif
 #endif // PIDTEMP
 
