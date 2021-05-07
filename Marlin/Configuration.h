@@ -114,6 +114,13 @@
 #define SERIAL_PORT_2 0
 
 /**
+ * Select a third serial port on the board to use for communication with the host.
+ * Currently only supported for AVR, DUE, LPC1768/9 and STM32/STM32F1
+ * :[-1, 0, 1, 2, 3, 4, 5, 6, 7]
+ */
+//#define SERIAL_PORT_3 1
+
+/**
  * This setting determines the communication speed of the printer.
  *
  * 250000 works in most cases, but you might try a lower speed if
@@ -133,7 +140,7 @@
 #endif
 
 // Name displayed in the LCD "Ready" message and Info menu
-#define CUSTOM_MACHINE_NAME "X5SA-Pro V6 330 SKR1_4 Turbo"
+#define CUSTOM_MACHINE_NAME "X5SA-Pro SKR 1.4T"
 
 // Printer's unique ID, used by some programs to differentiate between machines.
 // Choose your own or use a service like https://www.uuidgenerator.net/version4
@@ -513,9 +520,15 @@
     #define DEFAULT_Ki_LIST {   1.08,   1.08 }
     #define DEFAULT_Kd_LIST { 114.00, 114.00 }
   #else
-    #define DEFAULT_Kp  15.24
-    #define DEFAULT_Ki   0.92
-    #define DEFAULT_Kd  63.25
+    //#define DEFAULT_Kp  15.24
+    //#define DEFAULT_Ki   0.92
+    //#define DEFAULT_Kd  63.25
+
+    //Tronxy X5SA-Pro
+    #define DEFAULT_Kp  17.2651
+    #define DEFAULT_Ki   0.9847
+    #define DEFAULT_Kd  75.6752
+
   #endif
 #endif // PIDTEMP
 
@@ -536,7 +549,7 @@
  * heater. If your configuration is significantly different than this and you don't understand
  * the issues involved, don't use bed PID until someone else verifies that your hardware works.
  */
-//#define PIDTEMPBED
+#define PIDTEMPBED
 
 //#define BED_LIMIT_SWITCHING
 
@@ -554,9 +567,14 @@
 
   // 120V 250W silicone heater into 4mm borosilicate (MendelMax 1.5+)
   // from FOPDT model - kp=.39 Tp=405 Tdead=66, Tc set to 79.2, aggressive factor of .15 (vs .1, 1, 10)
-  #define DEFAULT_bedKp 10.00
-  #define DEFAULT_bedKi .023
-  #define DEFAULT_bedKd 305.4
+  //#define DEFAULT_bedKp 10.00
+  //#define DEFAULT_bedKi .023
+  //#define DEFAULT_bedKd 305.4
+
+  //Tronxy X5SA-Pro
+  #define DEFAULT_bedKp 258.3625
+  #define DEFAULT_bedKi 51.6209
+  #define DEFAULT_bedKd 862.0697
 
   // FIND YOUR OWN: "M303 E-1 C8 S90" to run autotune on the bed at 90 degreesC for 8 cycles.
 #endif // PIDTEMPBED
@@ -713,13 +731,13 @@
 #endif
 
 // Mechanical endstop with COM to ground and NC to Signal uses "false" here (most common setup).
-#define X_MIN_ENDSTOP_INVERTING false // Set to true to invert the logic of the endstop.
-#define Y_MIN_ENDSTOP_INVERTING false // Set to true to invert the logic of the endstop.
-#define Z_MIN_ENDSTOP_INVERTING false // Set to true to invert the logic of the endstop.
+#define X_MIN_ENDSTOP_INVERTING true // Set to true to invert the logic of the endstop.
+#define Y_MIN_ENDSTOP_INVERTING true // Set to true to invert the logic of the endstop.
+#define Z_MIN_ENDSTOP_INVERTING true // Set to true to invert the logic of the endstop.
 #define X_MAX_ENDSTOP_INVERTING false // Set to true to invert the logic of the endstop.
 #define Y_MAX_ENDSTOP_INVERTING false // Set to true to invert the logic of the endstop.
 #define Z_MAX_ENDSTOP_INVERTING false // Set to true to invert the logic of the endstop.
-#define Z_MIN_PROBE_ENDSTOP_INVERTING false // Set to true to invert the logic of the probe.
+#define Z_MIN_PROBE_ENDSTOP_INVERTING true // Set to true to invert the logic of the probe.
 
 /**
  * Stepper Drivers
@@ -1188,7 +1206,7 @@
 // Invert the stepper direction. Change (or reverse the motor connector) if an axis goes the wrong way.
 #define INVERT_X_DIR false
 #define INVERT_Y_DIR false
-#define INVERT_Z_DIR false
+#define INVERT_Z_DIR true
 
 // @section extruder
 
@@ -1204,7 +1222,7 @@
 
 // @section homing
 
-//#define NO_MOTION_BEFORE_HOMING // Inhibit movement until all axes have been homed. Also enable HOME_AFTER_DEACTIVATE for extra safety.
+#define NO_MOTION_BEFORE_HOMING // Inhibit movement until all axes have been homed. Also enable HOME_AFTER_DEACTIVATE for extra safety.
 //#define HOME_AFTER_DEACTIVATE   // Require rehoming after steppers are deactivated. Also enable NO_MOTION_BEFORE_HOMING for extra safety.
 
 /**
@@ -1217,7 +1235,7 @@
 #define Z_HOMING_HEIGHT  10      // (mm) Minimal Z height before homing (G28) for Z clearance above the bed, clamps, ...
                                   // Be sure to have this much clearance over your Z_MAX_POS to prevent grinding.
 
-//#define Z_AFTER_HOMING  10      // (mm) Height to move to after homing Z
+#define Z_AFTER_HOMING  10      // (mm) Height to move to after homing Z
 
 // Direction of endstops when homing; 1=MAX, -1=MIN
 // :[-1,1]
@@ -1265,7 +1283,7 @@
 #endif
 
 #if EITHER(MIN_SOFTWARE_ENDSTOPS, MAX_SOFTWARE_ENDSTOPS)
-  //#define SOFT_ENDSTOPS_MENU_ITEM  // Enable/Disable software endstops from the LCD
+  #define SOFT_ENDSTOPS_MENU_ITEM  // Enable/Disable software endstops from the LCD
 #endif
 
 /**
@@ -1286,7 +1304,7 @@
   #define FIL_RUNOUT_ENABLED_DEFAULT true // Enable the sensor on startup. Override with M412 followed by M500.
   #define NUM_RUNOUT_SENSORS   1          // Number of sensors, up to one per extruder. Define a FIL_RUNOUT#_PIN for each.
 
-  #define FIL_RUNOUT_STATE     LOW        // Pin state indicating that filament is NOT present.
+  #define FIL_RUNOUT_STATE     HIGH       // Pin state indicating that filament is NOT present.
   #define FIL_RUNOUT_PULLUP               // Use internal pullup for filament runout pins.
   //#define FIL_RUNOUT_PULLDOWN           // Use internal pulldown for filament runout pins.
   //#define WATCH_ALL_RUNOUT_SENSORS      // Execute runout script on any triggering sensor, not only for the active extruder.
@@ -1400,8 +1418,8 @@
  */
 #define PREHEAT_BEFORE_LEVELING
 #if ENABLED(PREHEAT_BEFORE_LEVELING)
-  #define LEVELING_NOZZLE_TEMP 150   // (°C) Only applies to E0 at this time
-  #define LEVELING_BED_TEMP     60
+  #define LEVELING_NOZZLE_TEMP 200   // (°C) Only applies to E0 at this time
+  #define LEVELING_BED_TEMP     80
 #endif
 
 /**
