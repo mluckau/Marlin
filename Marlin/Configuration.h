@@ -2186,9 +2186,7 @@
 
 //
 // 3-wire SR LCD with strobe using 74HC4094
-// https://github.com/mikeshub/SailfishLCD
-// Uses the code directly from Sailfish
-//
+// https://github.com/mikeshub/SailfishLCDTOUCH_SCREEN_CALIBRATION
 //#define FF_INTERFACEBOARD
 
 //
@@ -2597,7 +2595,7 @@
 //
 //#define TOUCH_SCREEN
 #ifndef TFT_LVGL_UI
-  #define TOUCH_SCREEN
+  //#define TOUCH_SCREEN
 #endif
 //DONE BY CHITU BOARD
 #if ENABLED(TOUCH_SCREEN)
