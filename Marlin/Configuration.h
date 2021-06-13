@@ -633,10 +633,10 @@
   //#define DEFAULT_bedKi .023
   //#define DEFAULT_bedKd 305.4
 
-  //Tronxy X5SA-Pro
-  #define DEFAULT_bedKp 258.3625
-  #define DEFAULT_bedKi 51.6209
-  #define DEFAULT_bedKd 862.0697
+  //Tronxy X5SA-Pro with 6mm Aluplate and 230V heating element
+  #define DEFAULT_bedKp 58.4759
+  #define DEFAULT_bedKi 10.7979
+  #define DEFAULT_bedKd 211.1175
 
   // FIND YOUR OWN: "M303 E-1 C8 S90" to run autotune on the bed at 90 degreesC for 8 cycles.
 #endif // PIDTEMPBED
